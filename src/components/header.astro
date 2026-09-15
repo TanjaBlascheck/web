@@ -1,70 +1,150 @@
 ---
-import Navigation from '../components/navigation.astro';
+import Navigation from './navigation.astro';
+import { Image } from 'astro:assets';
+import imageEuroVisLogo from '../assets/logos/logo_eurovis.svg';
 
 interface Props {
   pageTitle: string;
-  fontColor: string;
+  colorLightBlue: string;
+  colorMediumBlue: string;
+  colorAnthracite: string;
+  colorOrange: string;
 }
-const { pageTitle, fontColor } = Astro.props;
+const { pageTitle, colorLightBlue, colorMediumBlue, colorAnthracite, colorOrange } = Astro.props;
 ---
 
 <!-- CSS -------------------------------------------------------- -->
-<style define:vars={{ fontColor }}>   
-
-    .headline {
-        display:                block;
-        margin:                 0;
-        padding-top:            1rem;
-        text-align:             center;             
-        font-size:              4rem; 
-        font-weight:            bold;
-        color:                  black;
-        background-color:       var(--fontColor);
-    }
+<style define:vars={{ colorLightBlue, colorMediumBlue, colorAnthracite, colorOrange }}>   
 
     .banner {
         display:                block;
-        width:                  100%;
-        height:                 auto;
-        margin:                 0;
-        padding:                0;
-        margin-bottom:          -3px;
-        background-color:       var(--fontColor);
+        position:               relative;
+        height:                 8rem;
+        margin-top:             2rem;
+        margin-bottom:          2rem;
     }
 
-    span.avoidwrap { 
-        display:                inline-block; 
+    .logo {
+        position:                absolute;
+        left:                    15vw;
+        bottom:                  0;        
     }
 
-    /***** Additional options for Responsive Web Design *****/
+    .logo-image{
+        height:                  8rem;
+        width:                   auto;
+    }    
 
-    @media screen and (max-width:1080px) {
+    .conference {
+        position:               absolute;
+        right:                  15vw;
+        bottom:                 0;
+        text-align:             right;        
+        color:                  var(--colorMediumBlue);
+        font-size:              1.5rem;        
+    }
 
-        .headline {      
-            font-size:          3rem; 
-        }
+    .title {
+        font-family:            var(--font-roboto-condensed-bold), system-ui, -apple-system, sans-serif;         
+    }
 
-    } 
+    .locationdate {
+        font-family:            var(--font-roboto-condensed-light), system-ui, -apple-system, sans-serif; 
+    }
 
-    @media screen and (max-width:720px) {
 
-        .headline {      
-            font-size:          2rem; 
-        }
+/***** Additional options for Responsive Web Design *****/
+@media screen and (max-width:1250px) {
 
-    }          
+    .banner {
+        height:                 7rem;
+    }
+
+    .logo-image {
+        height:                 7rem;
+    }   
+
+    .conference {
+        font-size:              1.3rem;
+    }
+}        
+
+@media screen and (max-width: 950px) {
+
+    .banner {
+        height:                 6rem;
+    }
+
+    .logo-image {
+        height:                 6rem;
+    }   
+
+    .conference {
+        font-size:              1.1rem;
+    }  
+}
+
+@media screen and (max-width: 750px) {
+
+    .banner {
+        height:                 5rem;
+    }
+
+    .logo-image {
+        height:                 5rem;
+    }   
+
+    .conference {
+        font-size:              1rem;
+    }  
+}
+
+@media screen and (max-width: 720px) {
+
+    .logo {
+        left:                    10vw;
+    }
+
+    .conference {
+        right:                  15vw;  
+    }
+   
+}
 
 </style>
+
 
 <!-- HTML ------------------------------------------------------- -->
 <header>
 
-    <div class="headline">Eurographics Conference on <span class="avoidwrap"> Visualization 2027 </span></div>
+    <!-- Banner -->
+    <a href={import.meta.env.BASE_URL}>
+        <div class="banner">
+            <div class="logo">
+                <Image
+                    src={imageEuroVisLogo}
+                    alt="EuroVis Logo Stuttgart"
+                    class="logo-image"
+                />
+            </div>
+            <div class="conference">
+                <span class="title">
+                    The Eurographics Conference on Visualization<br>
+                </span>
+                <span class="locationdate">
+                    Stuttgart, Germany<br>
+                    May 31 - June 06, 2027
+                </span>
+            </div>
+        </div>
+    </a>
 
-    <!-- OPTIONAL
-    <img  class="banner" src="/src/assets/banner_skyline-long.svg" alt="EuroVis27 Banner" />
-    -->
-
-    <Navigation pageTitle={pageTitle} fontColor={fontColor}/>
+    <Navigation 
+      pageTitle={pageTitle} 
+      colorLightBlue={colorLightBlue}
+      colorMediumBlue={colorMediumBlue}
+      colorAnthracite={colorAnthracite}
+      colorOrange={colorOrange}
+    />
 
 </header>

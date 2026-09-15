@@ -1,0 +1,187 @@
+---
+import Header from "../components/header.astro";
+import Footer from "../components/footer.astro";
+
+import { SEO } from "astro-seo";
+import { Font } from "astro:assets";
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+
+const colorLightBlue   = "rgb(  0, 190, 255)";
+const colorMediumBlue  = "rgb(  0,  65, 145)";
+const colorAnthracite  = "rgb( 62,  68,  76)";
+const colorOrange      = "rgb(239, 152,   0)";
+
+---
+
+<!-- HTML ------------------------------------------------------- -->
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+		<link rel="icon" href= {import.meta.env.BASE_URL + "favicon.ico"} />
+		<!--<link rel="icon" type="image/svg+xml" href= {import.meta.env.BASE_URL + "/favicon.svg"}/> -->    
+		<!-- <link rel="stylesheet" href= {import.meta.env.BASE_URL +"/src/styles/global.css"} /> -->
+		<title>EuroVis27 - Stuttgart</title>
+    <SEO
+      title={title}
+      titleTemplate="%s - EuroVis 2027"
+      description={description}
+      canonical="https://eurovis27.github.io/web/"
+      noindex={false}
+      nofollow={false}
+      openGraph={{
+        basic: {
+          title: title || "EuroVis 2027",
+          type: "website",
+          image: "/seo-screen.png",
+          url: "https://eurovis27.github.io/web/",
+        },
+        optional: {
+          locale: "en_US",
+          siteName: "EuroVis 2027",
+          description: "{description}"
+        },
+      }}
+    />
+    <Font cssVariable="--font-roboto-regular"/>
+    <Font cssVariable="--font-roboto-medium"/>
+    <Font cssVariable="--font-roboto-bold"/>
+    <Font cssVariable="--font-roboto-condensed"/>
+    <Font cssVariable="--font-roboto-condensed-light"/>
+    <Font cssVariable="--font-roboto-condensed-bold"/>
+
+	</head>
+	<body>
+
+        <Header 
+            pageTitle={title} 
+            colorLightBlue={colorLightBlue}
+            colorMediumBlue={colorMediumBlue}
+            colorAnthracite={colorAnthracite}
+            colorOrange={colorOrange}
+        />
+
+        <div class="content">
+            <slot /> <!-- Content of the page -->
+        </div>
+
+        <Footer 
+            colorLightBlue={colorLightBlue}
+            colorMediumBlue={colorMediumBlue}
+            colorAnthracite={colorAnthracite}
+            colorOrange={colorOrange}
+        />
+    
+	</body>
+</html>
+
+<!-- CSS -------------------------------------------------------- -->
+<style is:global define:vars={{ colorLightBlue, colorMediumBlue, colorAnthracite, colorOrange }}>
+
+    body {
+        color:              var(--colorMediumBlue);
+        min-height:         100vh; /* % of viewport height */ 
+        font-size:          1rem; 
+        padding:            0;
+        margin:             0;
+        display:            grid;
+        grid-template-rows: auto 1fr auto;
+        font-family:        var(--font-roboto-regular), system-ui, -apple-system, sans-serif; 
+    }
+
+    header {
+        min-height:         1rem;
+    }
+
+    footer {
+        min-height:         1rem;
+    }
+
+    h1 {
+        font-weight:        normal;
+        font-family:        var(--font-roboto-bold), system-ui, -apple-system, sans-serif; 
+    }
+
+    h2 {
+        font-weight:        normal;
+        font-family:        var(--font-roboto-medium), system-ui, -apple-system, sans-serif; 
+    }
+
+    h3 {
+        color:              var(--colorMediumBlue);
+        font-size:          1.5rem;
+        font-weight:        normal;  
+        font-family:        var(--font-roboto-medium), system-ui, -apple-system, sans-serif; 
+    }
+
+    a {
+        color:              var(--colorLightBlue);
+    }
+
+    a:visited {
+        color:              var(--colorOrange)
+    }
+
+    a:hover {
+        color:              var(--colorOrange);
+    }
+
+    hr  {
+        color :             var(--colorMediumBlue);
+        background-color :  var(--colorMediumBlue);
+        border-color :      var(--colorMediumBlue);
+        width:              100%; 
+        border:             none;
+        height:             1px;
+    }
+
+    figcaption {
+        color:              var(--colorLightBlue);
+        text-align:         center;
+        font-family:        var(--font-roboto-condensed), system-ui, -apple-system, sans-serif; 
+        font-size:          small;
+    }
+
+    .content {
+        padding-left:       15vw;
+        padding-right:      15vw;
+        padding-top:        1vw;
+        padding-bottom:     1vw;
+        min-height:         400px; 
+    }
+
+    span.avoidwrap { 
+        display:            inline-block; 
+    }
+
+/***** Additional options for Responsive Web Design *****/
+
+@media screen and (max-width: 1080px) {
+
+    body {
+        font-size:          1.75vw; 
+    }
+
+}
+
+@media screen and (max-width: 720px) {
+
+    html, body {
+        font-size:          2.5vw; 
+    }
+
+    .content {
+        padding-left:       10vw;
+        padding-right:      10vw;
+    }    
+}
+
+</style>

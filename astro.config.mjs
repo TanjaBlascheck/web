@@ -14,8 +14,8 @@ import rehypeExternalLinks from "rehype-external-links";
 
 // https://astro.build/config
 export default defineConfig({
-  site:           'https://eurovis27.github.io', 
-  base:           '/web', // import.meta.env.BASE_URL
+  site:           'https://eurovis27.github.io/web', 
+  base:           '', // import.meta.env.BASE_URL
   trailingSlash:  'always',
   integrations: [
     mdx(), 
@@ -36,9 +36,9 @@ export default defineConfig({
     compressor({ 
       gzip: false, 
       brotli: true,
-      fileExtensions: [".css", ".js", ".html", ".xml", ".cjs", ".mjs", ".svg", ".txt"] 
+      fileExtensions: [".css", ".js", ".html", ".xml", ".cjs", ".mjs", ".svg", ".txt", ".mdx", ".md", ".astro"] 
     }),
-    mailObfuscation()
+    mailObfuscation(),
   ],
   markdown: {
     processor: unified({
@@ -56,26 +56,86 @@ export default defineConfig({
   },
   fonts: [{
     provider: fontProviders.local(),
-    name: "SupremeLight",
-    cssVariable: "--font-supreme-light",
+    name: "Roboto Regular",
+    cssVariable: "--font-roboto-regular",
     options: {
       variants: [{
         src: [
-          './src/assets/fonts/Supreme/Supreme-Light.woff2', 
-          './src/assets/fonts/Supreme/Supreme-Light.woff', 
-          './src/assets/fonts/Supreme/Supreme-Light.ttf'],
-        weight:  300,
+          './src/assets/fonts/roboto/Roboto-Regular.ttf'
+        ],
+        weight:  400,
         style:   'normal',
         display: 'swap'
-      },
-      {
+      }]
+    }
+  },
+  {
+    provider: fontProviders.local(),
+    name: "Roboto Medium",
+    cssVariable: "--font-roboto-medium",
+    options: {
+      variants: [{
         src: [
-          './src/assets/fonts/Supreme/Supreme-Bold.woff2', 
-          './src/assets/fonts/Supreme/Supreme-Bold.woff', 
-          './src/assets/fonts/Supreme/Supreme-Bold.ttf'],
+          './src/assets/fonts/roboto/Roboto-Medium.ttf'
+        ],
+        weight:  500,
+        style:   'normal'
+      }]
+    }
+  },
+  {
+    provider: fontProviders.local(),
+    name: "Roboto Bold",
+    cssVariable: "--font-roboto-bold",
+    options: {
+      variants: [{
+        src: [
+          './src/assets/fonts/roboto/Roboto-Bold.ttf'
+        ],
         weight:  700,
-        style:   'bold',
-        display: 'swap'
+        style:   'normal'
+      }]
+    }
+  },
+  {
+    provider: fontProviders.local(),
+    name: "Roboto Condensed",
+    cssVariable: "--font-roboto-condensed",
+    options: {
+      variants: [{
+        src: [
+          './src/assets/fonts/roboto-condensed/RobotoCondensed-Regular.ttf'
+        ],
+        weight:  400,
+        style:   'normal'
+      }]
+    }
+  },  
+  {
+    provider: fontProviders.local(),
+    name: "Roboto Condensed Light",
+    cssVariable: "--font-roboto-condensed-light",
+    options: {
+      variants: [{
+        src: [
+          './src/assets/fonts/roboto-condensed/RobotoCondensed-Light.ttf'
+        ],
+        weight:  300,
+        style:   'normal'
+      }]
+    }
+  },
+{
+    provider: fontProviders.local(),
+    name: "Roboto Condensed Bold",
+    cssVariable: "--font-roboto-condensed-bold",
+    options: {
+      variants: [{
+        src: [
+          './src/assets/fonts/roboto-condensed/RobotoCondensed-Bold.ttf'
+        ],
+        weight:  700,
+        style:   'normal'
       }]
     }
   }]

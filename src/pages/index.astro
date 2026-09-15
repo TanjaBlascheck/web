@@ -1,12 +1,80 @@
 ---
-import Layout from "../layouts/layout.astro";
+import Layout from "../layouts/layout-main.astro";
 
-import * as FrontMatter from "../components/frontmatter.md";
+import * as Welcome from "../components/welcome.mdx";
+import * as Information from "../components/information.mdx";
+import * as Partners from "../components/partners.mdx";
+import * as Updates from "../components/updates.mdx";
 ---
 
-<!-- HTML ------------------------------------------------------- -->
-<Layout title={FrontMatter.frontmatter.title} description={FrontMatter.frontmatter.description}>
+<!-- CSS -------------------------------------------------------- -->
+<!-- The style is set to ‘global’ to allow formatting of the Markdown elements -->
+<style is:global> 
 
-    <FrontMatter.Content />
+    .news {
+        color:                  white;
+        background-color:       var(--colorMediumBlue);
+        margin:                 0;
+        padding-top:            0.5rem;
+        padding-bottom:         0.5rem;
+        padding-left:           2rem;
+        padding-right:          2rem;
+        margin-top:             2rem;
+        margin-bottom:          2rem;
+    }
+
+    ul {
+        list-style-type:        none;
+        padding-inline-start:   0;
+        margin-left:            0;
+    }
+
+    .separator {
+        width:                  100%; 
+        margin-top:             1rem;
+    }
+
+    .information {
+        float:                  right; 
+        margin:                 0; 
+        padding-left:           0.25rem;
+        padding-bottom:         1rem;
+    }
+
+    .information img {
+        height:                 15rem;
+    }    
+
+/***** Additional options for Responsive Web Design *****/
+
+@media screen and (max-width: 1080px) {
+
+    .information {
+        float:                  none;
+        text-align:             center;
+        display:                block; 
+        padding-left:           0;
+    }
+}    
+
+</style>
+
+
+<!-- HTML ------------------------------------------------------- -->
+<Layout title="Home" description="Front page of the website">
+
+    <Welcome.Content />
+
+<!--
+    <div class="news">
+        <Updates.Content />
+    </div>
+-->
+
+    <Information.Content />
+
+    <hr>
+
+    <Partners.Content />
 
 </Layout>

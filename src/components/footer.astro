@@ -1,15 +1,20 @@
 ---
-import Disclaimer from '../components/disclaimer.md';
+import Disclaimer from './disclaimer.mdx';
+import { Image } from 'astro:assets';
+import imageSilhouette from '../assets/logos/silhouette_stuttgart_long_blue.svg';
 
 interface Props {
-  fontColor: string;
+  colorLightBlue: string;
+  colorMediumBlue: string;
+  colorAnthracite: string;
+  colorOrange: string;
 }
-const { fontColor } = Astro.props;
+const { colorLightBlue, colorMediumBlue, colorAnthracite, colorOrange } = Astro.props;
 ---
 
 <!-- CSS -------------------------------------------------------- -->
 <!-- Make it global to also have it applied to included components -->
-<style is:global define:vars={{ fontColor }}> 
+<style is:global define:vars={{ colorLightBlue, colorMediumBlue, colorAnthracite, colorOrange }}> 
 
     footer {
         display:                flex;
@@ -18,100 +23,59 @@ const { fontColor } = Astro.props;
         position:               relative;
         margin:                 0;
         padding:                0;
-        background-color:       black;
+        background-color:       var(--colorMediumBlue);
         width:                  100%;
         text-align:             center;
     }
 
-    .miscLinks {
-        display:                flex;
-        float:                  right;
-        position:               absolute;
-        right:                  3rem;
-        gap:                    1rem;
-    }
-
-    .miscLinks a {
-        font-size:              1rem;
-        color:                  black;
-        background-color:       gray;
-        text-decoration:        none;
-        transition-property:    background-color; 
-        transition-duration:    0.5s;        
-    }
-
-    .miscLinks a:hover {
-        background-color:       var(--fontColor);
-    }  
-    
-    .contributelink {
-        display:                inline-block;
-        padding:                0.25rem;
-        padding-left:           1.5rem;
-        background:             url('../assets/logo_github.svg');
-        background-repeat:      no-repeat;
-        background-position:    0.25rem center;
-        background-size:        1rem 1rem;
-    }
-
-    .shoplink {
-        display:                inline-block;
-        padding:                0.25rem;
-        padding-left:           1.5rem;
-        background:             url('../assets/logo_bw-lions.svg');
-        background-repeat:      no-repeat;
-        background-position:    0.25rem center;
-        background-size:        1rem 1rem;
-    }  
-
     .disclaimer {
         font-size:              0.8rem;
-        color:                  gray;
-        padding-top:            1rem;
+        color:                  white;
         padding-bottom:         1rem;
-        padding-left:           1rem;
-        padding-right:          1rem;
     }
 
     .disclaimer a {
-        color:                  gray;
+        color:                  white;
     }
 
-    .disclaimer a:hover {
-        color:                  var(--fontColor);
-    }    
+    .banner-image {
+        display:                flex;
+        width:                  100%;
+        height:                 auto;
+        margin:                 0;
+        padding:                0;
+        margin-bottom:          -3px;
+        background-color:       white;
+    }
 
-    /***** Additional options for Responsive Web Design *****/
 
-    @media screen and (max-width: 1250px) {
+/***** Additional options for Responsive Web Design *****/
 
-        footer {
-            display:            flex;
-            flex-direction:     column;
-            align-items:        center;
-            padding-top:        2rem;
-        }
+@media screen and (max-width: 1250px) {
 
-        .miscLinks {
-            position:           static; 
-            justify-content:    center;
-        }   
-    }      
+    footer {
+        display:            flex;
+        flex-direction:     column;
+        align-items:        center;
+    }
+}      
 
 </style>
+
 
 <!-- HTML ------------------------------------------------------- -->
 <footer>
 
-    <!-- OPTIONAL
-    <div class="miscLinks">
-        <a class="contributelink" href="https://github.com/eurovis27/web/blob/main/CONTRIBUTE.md" rel="noopener noreferrer external" target="_blank">Contribute</a>
-        <a class="shoplink" href="https://shop.thelaend.de/index.php" rel="noopener noreferrer external" target="_blank">The Länd Fänshop</a>
-    </div>
-    -->
-
     <div class="disclaimer">
+
+        <Image
+            src={imageSilhouette}
+            alt="Silhouette of Stuttgart"
+            class="banner-image"
+        />
+
         <Disclaimer />
+
     </div>
 
 </footer>
