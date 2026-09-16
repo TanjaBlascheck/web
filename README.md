@@ -18,7 +18,7 @@ See the [contribution instructions](CONTRIBUTE.md) for information on how to con
 **Option 1: Development server**
 
 * Run `npm run dev`.
-* Open `http://localhost:4321/` in your browser.
+* Open `http://localhost:4321/web/` in your browser.
 
 **Option 2: Preview the production build**
 
