@@ -3,8 +3,42 @@ title:       Partners
 description: ...
 ---
 import { Picture } from 'astro:assets';
-import ustutt from '../assets/images/unistuttgart_logo_deutsch_cmyk-01.png';
+import ustutt from '../assets/logos/unistuttgart_logo_deutsch_cmyk-01.png';
+import visus from '../assets/logos/VISUS_Logo-Titel-EN_RGB.png';
+import hft from '../assets/logos/hft-logo.png'
+import infos from '../assets/logos/infos.png'
+import planetarium from '../assets/logos/PlaStu_Logo002_blue_transp.png'
+
+export const gridStyle = {
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
+  gap: '24px',
+  alignItems: 'center', /* Centers logos vertically against each other */
+  width: '100%',
+  maxWidth: '100%',
+  boxSizing: 'border-box',
+};
+
+export const pictureStyle = {
+  width: '100%',
+  maxWidth: '100%',
+  display: 'block',
+};
+
+export const imgStyle = {
+  width: '100%',          /* Forces the image to adhere to the grid column boundary */
+  maxWidth: '100%',       
+  height: 'auto',
+  maxHeight: '65px',      /* Slightly reduced to look cleaner as an inline partner logo strip */
+  objectFit: 'contain',
+};
 
 ### Partners
 
-<Picture src={ustutt} formats={['avif', 'webp']} alt="Logo of the University of Stuttgart" />
+<div style={gridStyle}>
+<Picture src={ustutt} formats={['avif', 'webp']} alt="Logo of the University of Stuttgart" pictureAttributes={{ style: pictureStyle }} style={imgStyle}/>
+<Picture src={visus} formats={['avif', 'webp']} alt="Logo of the Visualization Research Center of the University of Stuttgart" pictureAttributes={{ style: pictureStyle }} style={imgStyle}/>
+<Picture src={hft} formats={['avif', 'webp']} alt="Logo of the Stuttgart Technical University of Applied Sciences" pictureAttributes={{ style: pictureStyle }} style={imgStyle}/>
+<Picture src={infos} formats={['avif', 'webp']} alt="Logo of the Informatik Forum Stuttgart" pictureAttributes={{ style: pictureStyle }} style={imgStyle}/>
+<Picture src={planetarium} formats={['avif', 'webp']} alt="Logo of the Informatik Forum Stuttgart" pictureAttributes={{ style: pictureStyle }} style={imgStyle}/>
+</div>
