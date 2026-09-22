@@ -8,9 +8,19 @@ import { Font } from "astro:assets";
 interface Props {
   title: string;
   description: string;
+  sourceFile?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, sourceFile: suppliedSourceFile } = Astro.props;
+
+const routePath = Astro.url.pathname
+    .replace(import.meta.env.BASE_URL, "")
+    .replace(/^\/+|\/+$/g, "");
+const sourceFile = suppliedSourceFile ?? (routePath === ""
+    ? "src/pages/index.astro"
+    : ["legal-notice", "privacy-notice"].includes(routePath)
+        ? `src/pages/${routePath}.astro`
+        : `src/pages/${routePath}.mdx`);
 
 const colorLightBlue   = "rgb(  0, 190, 255)";
 const colorMediumBlue  = "rgb(  0,  65, 145)";
@@ -78,6 +88,7 @@ const colorOrange      = "rgb(239, 152,   0)";
             colorMediumBlue={colorMediumBlue}
             colorAnthracite={colorAnthracite}
             colorOrange={colorOrange}
+            sourceFile={sourceFile}
         />
     
 	</body>

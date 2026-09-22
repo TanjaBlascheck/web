@@ -8,8 +8,9 @@ interface Props {
   colorMediumBlue: string;
   colorAnthracite: string;
   colorOrange: string;
+  sourceFile?: string;
 }
-const { colorLightBlue, colorMediumBlue, colorAnthracite, colorOrange } = Astro.props;
+const { colorLightBlue, colorMediumBlue, colorAnthracite, colorOrange, sourceFile } = Astro.props;
 ---
 
 <!-- CSS -------------------------------------------------------- -->
@@ -74,7 +75,7 @@ const { colorLightBlue, colorMediumBlue, colorAnthracite, colorOrange } = Astro.
             class="banner-image"
         />
 
-        <Disclaimer />
+        <Disclaimer sourceFile={sourceFile} />
 
     </div>
 
