@@ -5,10 +5,11 @@ description: Meta information about website
 import ObfuscateEmail from "./obfuscate-email.astro";
 
 
+
 &copy; Copyright 2026 Visualization Research Center of the University of Stuttgart (VISUS)
 
-__Legal Information:__ &nbsp; [Legal Notice](/legal-notice/) &nbsp; [Privacy Policy](/privacy-notice/)
+__Legal Information:__ &nbsp; [Legal Notice](/web/legal-notice/) &nbsp; [Privacy Policy](/web/privacy-notice/)
 
-__Problems with this webpage?__ Contact&nbsp;<ObfuscateEmail email='webmaster@visus.uni-stuttgart.de' />, [file a bug](https://github.com/eurovis27/web/issues/new/?title=Fix%20content%20problem%20on%20/src/components/md/welcome.md), or [suggest a fix](https://github.com/eurovis27/web/edit/main/src/components/md/welcome.md).
+__Problems with this webpage?__ Contact&nbsp;<ObfuscateEmail email='webmaster@visus.uni-stuttgart.de' />, {props.sourceFile && <><a href={`https://github.com/eurovis27/web/issues/new/?title=${encodeURIComponent(`Fix content problem on /${props.sourceFile}`)}`} target="_blank">file a bug</a>, or <a href={`https://github.com/eurovis27/web/edit/main/${encodeURI(props.sourceFile)}`} target="_blank">suggest a fix</a></>}.
 
 This website was created with [astro](https://astro.build/) and is hosted on [github pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages); it does not use cookies or trackers.
