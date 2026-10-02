@@ -18,21 +18,20 @@ const { colorLightBlue, colorMediumBlue, colorAnthracite, colorOrange, sourceFil
 <style is:global define:vars={{ colorLightBlue, colorMediumBlue, colorAnthracite, colorOrange }}> 
 
     footer {
-        display:                flex;
-        justify-content:        center;
-        align-items:            center;        
+        display:                block;
+        text-align:             center;
         position:               relative;
         margin:                 0;
         padding:                0;
         background-color:       var(--colorMediumBlue);
         width:                  100%;
-        text-align:             center;
     }
 
     .disclaimer {
         font-size:              0.8rem;
         color:                  white;
         padding-bottom:         1rem;
+        width:                  100%;
     }
 
     .disclaimer a {
@@ -42,6 +41,8 @@ const { colorLightBlue, colorMediumBlue, colorAnthracite, colorOrange, sourceFil
     .banner-image {
         display:                flex;
         width:                  100%;
+        max-width:              2560px;
+        flex-shrink:            0;
         height:                 auto;
         margin:                 0;
         padding:                0;
@@ -49,34 +50,37 @@ const { colorLightBlue, colorMediumBlue, colorAnthracite, colorOrange, sourceFil
         background-color:       white;
     }
 
+    .disclaimer-top {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: stretch;
+    }
+
+    .filling-element {
+        flex: 1;
+        background-color:       white;
+    }
 
 /***** Additional options for Responsive Web Design *****/
-
-@media screen and (max-width: 1250px) {
-
-    footer {
-        display:            flex;
-        flex-direction:     column;
-        align-items:        center;
-    }
-}      
 
 </style>
 
 
 <!-- HTML ------------------------------------------------------- -->
 <footer>
-
     <div class="disclaimer">
-
-        <Image
-            src={imageSilhouette}
-            alt="Silhouette of Stuttgart"
-            class="banner-image"
-        />
-
-        <Disclaimer sourceFile={sourceFile} />
-
+        <div class="disclaimer-top">
+            <div class="filling-element"></div>
+            <Image
+                src={imageSilhouette}
+                alt="Silhouette of Stuttgart"
+                class="banner-image"
+            />
+            <div class="filling-element"></div>
+        </div>
+        <div class="disclaimer-bottom">
+            <Disclaimer sourceFile={sourceFile} />
+        </div>
     </div>
-
 </footer>
