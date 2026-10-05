@@ -224,7 +224,7 @@ const jsonData = JSON.stringify(conferences);
     conferences.forEach((conf) => {
         if (conf.color == "#000000") totalEvs++;
     })
-    const sampledMap = sampleParaViewBlackBody(totalEvs);
+    const sampledMap = sampleParaViewBlackBody(totalEvs + 1); // no city should get pure white
 
     // iterate our color map to assign missing colors
     let EvIndex = totalEvs - 1;
@@ -240,13 +240,36 @@ const jsonData = JSON.stringify(conferences);
         const div = L.DomUtil.create('div', 'info legend');
         div.innerHTML = '<h4 style="margin: 0 0 8px 0; font-size: 14px;">Timeline</h4>';
 
+        const processedColors = Object.values(
+        conferences.reduce((acc: any, curr) => {
+            if (!acc[curr.color]) {
+            acc[curr.color] = {
+                ...curr,
+                years: [curr.year],
+            };
+            delete acc[curr.color].year;
+            } else {
+            acc[curr.color].years.push(curr.year);
+            }
+            return acc;
+        }, {})
+        );
+
         // Loop through the array of objects
-        conferences.forEach(entry => {
+        processedColors.forEach(entry => {
             // Append a row featuring a vertical colored bar and the year text
+            let yearstring = ""
+            if (entry.years.length > 1) {
+                const min = Math.min(...entry.years);
+                const max = Math.max(...entry.years);
+                yearstring = min + "-" + max;
+            } else {
+                yearstring = entry.years[0]
+            }
             div.innerHTML += `
                 <div class="legend-row">
                     <i style="background: ${entry.color}"></i>
-                    <span>${entry.year}</span>
+                    <span>${yearstring}</span>
                 </div>
             `;
         });
