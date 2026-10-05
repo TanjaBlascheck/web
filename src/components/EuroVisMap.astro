@@ -26,7 +26,7 @@ const conferences: Conference[] = [
   { year: 2017, city: "Barcelona", country: "Spain", url: "https://web.archive.org/web/20200804020100/https://eurovis2017.virvig.es/", lat: 41.3851, lng: 2.1734, color: "#000000" },
   { year: 2016, city: "Groningen", country: "Netherlands", url: "https://web.archive.org/web/20170921184648/https://www.cs.rug.nl/jbi/eurovis2016/", lat: 53.2194, lng: 6.5667, color: "#000000" },
   { year: 2015, city: "Cagliari", country: "Italy", url: "https://web.archive.org/web/2016012tan47/https://www.eurovis2015.it/", lat: 39.2234, lng: 9.1222, color: "#000000" },
-  { year: 2014, city: "Swansea", country: "UK", url: "https://web.archive.org/web/20191223160513/https://eurovis.swansea.ac.uk/", lat: 53.5718, lng: -3.9512, color: "#000000" },
+  { year: 2014, city: "Swansea", country: "UK", url: "https://web.archive.org/web/20191223160513/https://eurovis.swansea.ac.uk/", lat: 51.616667, lng: -3.95, color: "#000000" },
   { year: 2013, city: "Leipzig", country: "Germany", url: "https://web.archive.org/web/20140517070115/https://eurovis2013.de/", lat: 51.3397, lng: 12.3731, color: "#000000" },
   { year: 2012, city: "Vienna", country: "Austria", url: "https://www.cg.tuwien.ac.at/events/eurovis2012/", lat: 48.2082, lng: 16.3738, color: "#000000" },
   { year: 2011, city: "Bergen", country: "Norway", url: "https://web.archive.org/web/20160916200045/https://h.uib.no/eurovis2011/", lat: 60.3913, lng: 5.3220, color: "#000000" },
@@ -39,18 +39,18 @@ const conferences: Conference[] = [
   { year: 2004, city: "Konstanz", country: "Germany", url: null, lat: 47.6979, lng: 9.1827, color: "#8cc0bc" },
   { year: 2003, city: "Grenoble", country: "France", url: null, lat: 45.1885, lng: 5.7245, color: "#8cc0bc" },
   { year: 2002, city: "Barcelona", country: "Spain", url: null, lat: 41.3851, lng: 2.1734, color: "#8cc0bc" },
-  { year: 2001, city: "Ascona", country: "Switzerland", url: null, lat: 46.1681, lng: 8.7139, color: "#8cc0bc" },
+  { year: 2001, city: "Ascona", country: "Switzerland", url: null, lat: 46.155, lng: 8.768, color: "#8cc0bc" },
   { year: 2000, city: "Amsterdam", country: "Netherlands", url: null, lat: 52.3676, lng: 4.9041, color: "#8cc0bc" },
   { year: 1999, city: "Vienna", country: "Austria", url: null, lat: 48.2082, lng: 16.3738, color: "#8cc0bc" },
   { year: 1998, city: "Blaubeuren", country: "Germany", url: null, lat: 48.5514, lng: 9.3211, color: "#888888" },
-  { year: 1997, city: "Boulogne-sur-Mer", country: "France", url: null, lat: 50.9463, lng: 1.8114, color: "#888888" },
+  { year: 1997, city: "Boulogne-sur-Mer", country: "France", url: null, lat: 50.7264, lng: 1.6147, color: "#888888" },
   { year: 1996, city: "Prague", country: "Czech Republic", url: null, lat: 50.0755, lng: 14.4378, color: "#888888" },
   { year: 1995, city: "Chia", country: "Italy", url: null, lat: 38.908611, lng: 8.880556, color: "#888888" },
   { year: 1994, city: "Rostock", country: "Germany", url: null, lat: 54.0857, lng: 12.0921, color: "#888888" },
   { year: 1993, city: "Abingdon", country: "UK", url: null, lat: 51.7047, lng: -1.2178, color: "#888888" },
-  { year: 1992, city: "Viareggio", country: "Italy", url: null, lat: 43.8661, lng: 10.3865, color: "#888888" },
+  { year: 1992, city: "Viareggio", country: "Italy", url: null, lat: 43.86665, lng: 10.233333, color: "#888888" },
   { year: 1991, city: "Delft", country: "Netherlands", url: null, lat: 52.0117, lng: 4.3598, color: "#888888" },
-  { year: 1990, city: "Clamart", country: "France", url: null, lat: 48.7562, lng: 2.2620, color: "#888888" }
+  { year: 1990, city: "Clamart", country: "France", url: null, lat: 48.8014, lng: 2.2628, color: "#888888" }
 ];
 
 // We pass the data to the client via a JSON string to avoid hydration issues with complex objects
@@ -74,19 +74,58 @@ const jsonData = JSON.stringify(conferences);
     background: rgba(255, 255, 255, 0.8) !important;
     border: 1px solid #ccc !important;
     border-radius: 4px !important;
-    padding: 2px 6px !important;
+    padding: 1px 6px !important;
     font-size: 11px !important;
     font-weight: bold !important;
     color: #333 !important;
     white-space: nowrap !important;
     box-shadow: 0 1px 3px rgba(0,0,0,0.2) !important;
   }
+
+/* Container styling */
+.info.legend {
+    padding: 10px 14px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
+    color: #333;
+    line-height: 1.5;
+}
+
+/* Individual row alignment */
+.legend-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 3px;
+}
+
+.legend-row:last-child {
+    margin-bottom: 0;
+}
+
+/* The vertical color bar indicator */
+.legend-row i {
+    width: 12px;
+    height: 18px; /* Taller than it is wide to make a vertical bar */
+    margin-right: 8px;
+    opacity: 0.8;
+    border-radius: 2px; /* Slightly rounded corners */
+    display: inline-block;
+}
+
+/* Year text styling */
+.legend-row span {
+    font-size: 12px;
+    font-weight: 500;
+}
+
 </style>
 
 <style>
   .map-container {
     width: 100%;
-    height: 800px; /* Adjust height as needed */
+    height: 900px; /* Adjust height as needed */
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -102,6 +141,8 @@ const jsonData = JSON.stringify(conferences);
     font-family: sans-serif;
     line-height: 1.4;
   }
+
+  
 </style>
 
 <script>
@@ -191,28 +232,88 @@ const jsonData = JSON.stringify(conferences);
         if (conf.color == "#000000") arr[index].color = sampledMap[EvIndex--].hex;
     });
 
+    // draw legend
+    const legend = L.control({ position: 'bottomright' });
+
+    legend.onAdd = function (map) {
+        // Create the main container div
+        const div = L.DomUtil.create('div', 'info legend');
+        div.innerHTML = '<h4 style="margin: 0 0 8px 0; font-size: 14px;">Timeline</h4>';
+
+        // Loop through the array of objects
+        conferences.forEach(entry => {
+            // Append a row featuring a vertical colored bar and the year text
+            div.innerHTML += `
+                <div class="legend-row">
+                    <i style="background: ${entry.color}"></i>
+                    <span>${entry.year}</span>
+                </div>
+            `;
+        });
+
+        return div;
+    };
+    legend.addTo(map);
+
+    // iterate over cities and combine identical cities
+    const processedConferences = Object.values(
+      conferences.reduce((acc: any, curr) => {
+        if (!acc[curr.city]) {
+          acc[curr.city] = {
+            ...curr,
+            years: [curr.year],
+            colors: [curr.color],
+          };
+          delete acc[curr.city].year;
+          delete acc[curr.city].color;
+        } else {
+          acc[curr.city].years.push(curr.year);
+          acc[curr.city].colors.push(curr.color);
+        }
+        return acc;
+      }, {})
+    );
+
     // Add markers
-    conferences.forEach((conf) => {
+    processedConferences.reverse().forEach((conf: any) => {
       const popupContent = `
         <div style="padding: 5px;">
-          <strong>EuroVis ${conf.year}</strong><br />
+          <strong>EuroVis ${conf.years.sort((a, b) => a - b).join(', ')}</strong><br />
           ${conf.city}, ${conf.country}<br />
           ${conf.url ? `<a href="${conf.url}" target="_blank" style="color: #007bff; text-decoration: none;">Visit Website</a>` : '<em>No website available</em>'}
         </div>
       `;
 
-      let col = conf.color;
-      const marker = L.circleMarker([conf.lat, conf.lng], {
-        radius: 8,
-        fillColor: conf.color,
-        color: '#fff',                      // Border color
-        weight: 2,
-        opacity: 1,
-        fillOpacity: 0.7
-      }).addTo(map);
+      let marker = 0
+      if (conf.colors.length > 1) {
+        const inlineStyle = `
+            width: 100%; 
+            height: 100%; 
+            border-radius: 50%; 
+            background: linear-gradient(90deg, ${conf.colors[0]} 50%, ${conf.colors[1]} 50%);
+            border: 3px solid #ffffff;
+        `;
+        const dynamicIcon = L.divIcon({
+            className: 'split-circle-wrapper', // Keeps standard layout class separate
+            html: `<div style="${inlineStyle}"></div>`,
+            iconSize: 16,       // Size of the marker in pixels
+            iconAnchor: [12, 12]      // Centers the anchor directly in the middle
+        });
+        marker = L.marker([conf.lat, conf.lng], { icon: dynamicIcon }).addTo(map);
+      } else {
+        let col = conf.colors[0];
+        marker = L.circleMarker([conf.lat, conf.lng], {
+            radius: 8,
+            fillColor: col,
+            color: '#fff',                      // Border color
+            weight: 2,
+            opacity: 1,
+            fillOpacity: 1
+        }).addTo(map);
+      }
 
       // Add a permanent text label next to the marker
-      marker.bindTooltip(`${conf.city}, ${conf.year}`, {
+      marker.bindTooltip(`${conf.city}, ${conf.years.sort((a, b) => a - b).join(', ')}`, {
         permanent: true,
         direction: 'right',
         offset: [10, 0],
