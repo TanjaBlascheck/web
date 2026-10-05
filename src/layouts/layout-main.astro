@@ -6,16 +6,21 @@ import { SEO } from "astro-seo";
 import { Font } from "astro:assets";
 
 interface Props {
-  title: string;
-  description: string;
+  frontmatter: {
+      title: string;
+      description: string;
+  };
   sourceFile?: string;
 }
 
-const { title, description, sourceFile: suppliedSourceFile } = Astro.props;
+const { frontmatter, sourceFile: suppliedSourceFile } = Astro.props;
+
+const { title, description } = frontmatter;
 
 const routePath = Astro.url.pathname
     .replace(import.meta.env.BASE_URL, "")
     .replace(/^\/+|\/+$/g, "");
+
 const sourceFile = suppliedSourceFile ?? (routePath === ""
     ? "src/pages/index.astro"
     : ["legal-notice", "privacy-notice"].includes(routePath)
@@ -26,7 +31,6 @@ const colorLightBlue   = "rgb(  0, 190, 255)";
 const colorMediumBlue  = "rgb(  0,  65, 145)";
 const colorAnthracite  = "rgb( 62,  68,  76)";
 const colorOrange      = "rgb(239, 152,   0)";
-
 ---
 
 <!-- HTML ------------------------------------------------------- -->
@@ -57,7 +61,7 @@ const colorOrange      = "rgb(239, 152,   0)";
         optional: {
           locale: "en_US",
           siteName: "EuroVis 2027",
-          description: "{description}"
+          description: {description}
         },
       }}
     />
@@ -100,7 +104,7 @@ const colorOrange      = "rgb(239, 152,   0)";
     body {
         color:              var(--colorMediumBlue);
         min-height:         100vh; /* % of viewport height */ 
-        font-size:          1rem; 
+        font-size:          normal; 
         padding:            0;
         margin:             0;
         display:            grid;
@@ -128,7 +132,7 @@ const colorOrange      = "rgb(239, 152,   0)";
 
     h3 {
         color:              var(--colorMediumBlue);
-        font-size:          1.5rem;
+        font-size:          x-large;
         font-weight:        normal;  
         font-family:        var(--font-roboto-medium), system-ui, -apple-system, sans-serif; 
     }
@@ -165,7 +169,7 @@ const colorOrange      = "rgb(239, 152,   0)";
         padding-left:       15vw;
         padding-right:      15vw;
         padding-top:        1vw;
-        padding-bottom:     1vw;
+        padding-bottom:     5vw;
         min-height:         400px; 
     }
 

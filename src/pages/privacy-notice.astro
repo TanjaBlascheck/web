@@ -5,8 +5,8 @@ import * as PrivacyNotice from "../components/privacy-notice.mdx";
 ---
 
 <!-- HTML ------------------------------------------------------- -->
-<Layout title={PrivacyNotice.frontmatter.title} description={PrivacyNotice.frontmatter.description}>
+<Layout frontmatter={{ title: PrivacyNotice.frontmatter.title, description: PrivacyNotice.frontmatter.description }}>
 
-  <PrivacyNotice.Content />
+    <PrivacyNotice.Content />
 
 </Layout>
