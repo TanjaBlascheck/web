@@ -1,12 +1,12 @@
 ---
 interface Props {
-  pageTitle: string;
+  mobileCaption: string;
   colorLightBlue: string;
   colorMediumBlue: string;
   colorAnthracite: string;
   colorOrange: string;
 }
-const { pageTitle, colorLightBlue, colorMediumBlue, colorAnthracite, colorOrange } = Astro.props;
+const { mobileCaption, colorLightBlue, colorMediumBlue, colorAnthracite, colorOrange } = Astro.props;
 ---
 
 <!-- JAVA SCRIPT ------------------------------------------------ -->
@@ -110,7 +110,7 @@ const { pageTitle, colorLightBlue, colorMediumBlue, colorAnthracite, colorOrange
         display:                none;        
         float:                  none;
         padding-top:            0;
-        font-size:              1.25rem;
+        font-size:              1.5rem;
         font-weight:            normal;     
         text-transform:         uppercase; 
         font-family:            var(--font-roboto-condensed), system-ui, -apple-system, sans-serif;
@@ -242,7 +242,7 @@ const { pageTitle, colorLightBlue, colorMediumBlue, colorAnthracite, colorOrange
     .title {
         display:                block;
         color:                  white;
-        font-size:              1.75rem;
+        font-size:              1.5rem;
         font-weight:            normal;     
         text-transform:         uppercase; 
         font-family:            var(--font-roboto-condensed), system-ui, -apple-system, sans-serif;
@@ -286,7 +286,7 @@ const { pageTitle, colorLightBlue, colorMediumBlue, colorAnthracite, colorOrange
         <div class="bar"></div>
     </div>
     <div class="title">
-        {pageTitle}
+        {mobileCaption}
     </div>        
 
     <!-- The navigation menu -->
