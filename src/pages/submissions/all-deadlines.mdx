@@ -6,12 +6,9 @@ description: "All deadlines in one page"
 ---
 
 import { getCollection } from 'astro:content';
+import DeadlineItem from '../../components/DeadlineItem.astro';
 
 export const allDeadlines = await getCollection('deadlines');
-
-export const formatDate = (dateStr) => {
-  return new Date(dateStr).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-};
 
 {/* Sort all deadlines chronologically by their final target date (extended or original) */}
 export const sortedDeadlines = [...allDeadlines].sort((a, b) => {
@@ -39,20 +36,10 @@ export const groupedDeadlines = sortedDeadlines.reduce((groups, item) => {
     <table>
       <tbody>
         {items.map((item) => (
-          <tr class="deadline-tracker" data-original={item.data.originalDate} data-extended={item.data.extendedDate || ""}>
+          <tr>
             <td>{item.data.type}</td>
             <td>
-              <span class="date-display">
-                {item.data.extendedDate ? (
-                  <>
-                    <span class="crossed-out">{formatDate(item.data.originalDate)}</span>{" "}
-                    <span class="extension">{formatDate(item.data.extendedDate)}</span>
-                  </>
-                ) : (
-                  <span>{formatDate(item.data.originalDate)}</span>
-                )}
-              </span>
-              <span class="live-badge"></span>
+              <DeadlineItem category={item.data.category} type={item.data.type} hideType />
             </td>
           </tr>
         ))}
