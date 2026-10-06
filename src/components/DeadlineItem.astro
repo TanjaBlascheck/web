@@ -1,0 +1,146 @@
+---
+import { getCollection } from 'astro:content';
+
+interface Props {
+  category: string;
+  type: string;
+  verbose?: bool;
+}
+
+const { category, type, verbose = false } = Astro.props;
+
+const allDeadlines = await getCollection('deadlines');
+const deadline = allDeadlines.find(
+  (d) => d.data.category.toLowerCase() === category.toLowerCase() && 
+         d.data.type.toLowerCase() === type.toLowerCase()
+)?.data;
+
+const formatDate = (dateStr: string) => {
+  return new Date(dateStr).toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric'
+  });
+};
+---
+
+{deadline ? (
+  <span 
+    class="inline-deadline deadline-tracker" 
+    data-original={deadline.originalDate}
+    data-extended={deadline.extendedDate || ""}
+  >
+    { deadline.verbose ? (
+        <><strong>{deadline.category} ({deadline.type}):</strong>{" "}</>
+    ) : (
+        <><strong>{deadline.type}:</strong>{" "}</>
+    )}
+    <span class="date-display">
+      {deadline.extendedDate ? (
+        <>
+          <span class="crossed-out">{formatDate(deadline.originalDate)}</span>
+          <span class="extension">Extended: {formatDate(deadline.extendedDate)}</span>
+        </>
+      ) : (
+        <span class="normal-date">{formatDate(deadline.originalDate)}</span>
+      )}
+    </span>
+    <span class="live-countdown"></span>
+  </span>
+) : (
+  <span class="error">Deadline not found</span>
+)}
+
+<script>
+  function updateCountdowns() {
+    const trackers = document.querySelectorAll('.deadline-tracker');
+    const now = new Date().getTime();
+
+    trackers.forEach((el) => {
+      const tracker = el as HTMLElement;
+      const original = tracker.dataset.original;
+      const extended = tracker.dataset.extended;
+      
+      const targetString = extended || original;
+      if (!targetString) return;
+
+      // Automatically parses the ISO -12:00 target string correctly
+      const targetTime = new Date(targetString).getTime();
+      const countdownEl = tracker.querySelector('.live-countdown');
+      if (!countdownEl) return;
+
+      const diffMs = targetTime - now;
+
+      if (diffMs <= 0) {
+        tracker.classList.add('is-expired');
+        countdownEl.textContent = ' (Expired AoE)';
+        countdownEl.className = 'live-countdown expired';
+      } else {
+        tracker.classList.remove('is-expired');
+        
+        // Calculate intervals
+        const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+
+        let displayString = '';
+        if (days > 0) displayString += `${days}d `;
+        displayString += `${hours}h ${minutes}m left`;
+
+        countdownEl.textContent = ` (${displayString} AoE)`;
+
+        // Make it visually urgent if less than 48 hours remain
+        if (diffMs < 48 * 60 * 60 * 1000) {
+          countdownEl.className = 'live-countdown urgent';
+        } else {
+          countdownEl.className = 'live-countdown ongoing';
+        }
+      }
+    });
+  }
+
+  // Run on load and update every 30 seconds
+  updateCountdowns();
+  setInterval(updateCountdowns, 30000);
+</script>
+
+<style>
+  .inline-deadline {
+    font-family: system-ui, sans-serif;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+  .crossed-out {
+    text-decoration: line-through;
+    color: #888;
+    margin-right: 0.35rem;
+  }
+  .extension {
+    color: #e53e3e;
+    font-weight: 600;
+  }
+  .is-expired .date-display {
+    opacity: 0.5;
+  }
+  .live-countdown {
+    font-size: 0.85em;
+    font-weight: bold;
+  }
+  .live-countdown.ongoing {
+    color: #3182ce;
+  }
+  .live-countdown.urgent {
+    color: #dd6b20;
+    animation: pulse 2s infinite;
+  }
+  .live-countdown.expired {
+    color: #e53e3e;
+    font-weight: normal;
+  }
+  @keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.6; }
+    100% { opacity: 1; }
+  }
+</style>
