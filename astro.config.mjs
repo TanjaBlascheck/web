@@ -12,10 +12,14 @@ import remarkToc from 'remark-toc';
 import rehypeSlug from 'rehype-slug';
 import rehypeExternalLinks from "rehype-external-links";
 
+const isProduction = process.env.NODE_ENV === 'production';
+
 // https://astro.build/config
 export default defineConfig({
-  site:           'https://eurovis27.github.io', 
-  base:           '/web', // = import.meta.env.BASE_URL
+  site: isProduction
+    ? 'https://eurovis27.github.io'
+    : 'http://localhost:4321',
+  base:           'web', // = import.meta.env.BASE_URL
   trailingSlash:  'always',
   integrations: [
     mdx(), 

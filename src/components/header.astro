@@ -11,6 +11,8 @@ interface Props {
   colorOrange: string;
 }
 const { mobileCaption, colorLightBlue, colorMediumBlue, colorAnthracite, colorOrange } = Astro.props;
+
+const site = Astro.site?.origin;
 ---
 
 <!-- CSS -------------------------------------------------------- -->
@@ -115,7 +117,7 @@ const { mobileCaption, colorLightBlue, colorMediumBlue, colorAnthracite, colorOr
 <header>
 
     <!-- Banner -->
-    <a href={Astro.site + import.meta.env.BASE_URL}>
+    <a href={"https://eurovis27.github.io" + import.meta.env.BASE_URL}>
         <div class="banner">
             <div class="logo">
                 <Image

@@ -507,7 +507,9 @@ import "../styles/leaflet.css";
 
         // Initialize the map centered on Europe
         const map = L.map("map", {
-            scrollWheelZoom: false}
+                //scrollWheelZoom: false
+                touchZoom: false
+            }
         ).setView([50, 10], 5);
 
         // Add OpenStreetMap tile layer
