@@ -42,7 +42,7 @@ import * as Updates from "../components/updates.mdx";
     }
 
     .information img {
-        height:                 15rem;
+        max-height:                 15rem;
     }    
 
 /***** Additional options for Responsive Web Design *****/
@@ -54,8 +54,15 @@ import * as Updates from "../components/updates.mdx";
         text-align:             center;
         display:                block; 
         padding-left:           0;
-    }
-}    
+    }      
+}
+
+@media screen and (max-width: 720px) {
+
+    .information img {
+        max-height:                 10rem;
+    }        
+}   
 
 </style>
 
