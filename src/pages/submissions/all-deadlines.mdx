@@ -1,0 +1,49 @@
+---
+layout:      "../../layouts/layout-main.astro"
+title:       "Important Dates"
+parent:      "Submissions"
+description: "All deadlines in one page"
+---
+
+import { getCollection } from 'astro:content';
+import DeadlineItem from '../../components/DeadlineItem.astro';
+
+export const allDeadlines = await getCollection('deadlines');
+
+{/* Sort all deadlines chronologically by their final target date (extended or original) */}
+export const sortedDeadlines = [...allDeadlines].sort((a, b) => {
+  const dateA = new Date(a.data.extendedDate || a.data.originalDate);
+  const dateB = new Date(b.data.extendedDate || b.data.originalDate);
+  return dateA.getTime() - dateB.getTime();
+});
+
+{/* Group deadlines by category */}
+export const groupedDeadlines = sortedDeadlines.reduce((groups, item) => {
+  const category = item.data.category || 'Other';
+  if (!groups[category]) groups[category] = [];
+  groups[category].push(item);
+  return groups;
+}, {});
+
+# Important Dates
+
+{Object.entries(groupedDeadlines).map(([category, items]) => (
+  <div key={category} className="category-section" style={{ marginBottom: '2rem' }}>
+    
+    {/* Small heading for each category */}
+    <h3>{category}</h3>
+    
+    <table>
+      <tbody>
+        {items.map((item) => (
+          <tr>
+            <td>{item.data.type}</td>
+            <td>
+              <DeadlineItem category={item.data.category} type={item.data.type} hideType />
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+))}
