@@ -20,10 +20,14 @@
 
 /***** Additional options for Responsive Web Design *****/
 
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 1080px) {
 
-  .logo-grid {
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  }
+    .logo-grid {
+        grid-template-columns: repeat(auto-fit, minmax(75px, 1fr));
+    }
   
+    .partner-logo {
+        max-height:            45px;
+    }
+
 }

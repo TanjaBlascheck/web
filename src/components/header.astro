@@ -4,13 +4,13 @@ import { Image } from 'astro:assets';
 import imageEuroVisLogo from '../assets/logos/logo_eurovis.svg';
 
 interface Props {
-  pageTitle: string;
+  mobileCaption: string;
   colorLightBlue: string;
   colorMediumBlue: string;
   colorAnthracite: string;
   colorOrange: string;
 }
-const { pageTitle, colorLightBlue, colorMediumBlue, colorAnthracite, colorOrange } = Astro.props;
+const { mobileCaption, colorLightBlue, colorMediumBlue, colorAnthracite, colorOrange } = Astro.props;
 ---
 
 <!-- CSS -------------------------------------------------------- -->
@@ -140,7 +140,7 @@ const { pageTitle, colorLightBlue, colorMediumBlue, colorAnthracite, colorOrange
     </a>
 
     <Navigation 
-      pageTitle={pageTitle} 
+      mobileCaption={mobileCaption} 
       colorLightBlue={colorLightBlue}
       colorMediumBlue={colorMediumBlue}
       colorAnthracite={colorAnthracite}

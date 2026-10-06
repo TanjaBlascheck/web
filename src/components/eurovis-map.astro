@@ -1,8 +1,6 @@
+
 ---
-/**
- * EuroVisMap.astro
- * An interactive OpenStreetMap component showing EuroVis conference locations.
- */
+{/* An interactive OpenStreetMap component showing EuroVis conference locations */}
 
 interface Conference {
   year: number;
@@ -57,13 +55,10 @@ const conferences: Conference[] = [
 const jsonData = JSON.stringify(conferences);
 ---
 
+
 <!-- Include Leaflet CSS -->
-<link
-  rel="stylesheet"
-  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-  integrity="sha25template256"
-  crossorigin=""
-/>
+<link rel="stylesheet" href= {import.meta.env.BASE_URL +"/src/styles/leaflet.css"} />
+
 
 <div class="map-container">
   <div id="map" data-conferences={jsonData}></div>
