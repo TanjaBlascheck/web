@@ -1,348 +1,659 @@
 ---
 {/* An interactive OpenStreetMap component showing EuroVis conference locations */}
 
-
 interface Conference {
-  year: number;
-  city: string;
-  country: string;
-  url?: string;
-  lat: number;
-  lng: number;
+    year: number;
+    city: string;
+    country: string;
+    url?: string;
+    lat: number;
+    lng: number;
 }
 
 const conferences: Conference[] = [
-  { year: 2026, city: "Nottingham", country: "UK", url: "https://eurovis.org.uk/", lat: 52.9548, lng: -1.1581, color: "#000000" },
-  { year: 2025, city: "Luxembourg City", country: "Luxembourg", url: "https://www.eurovis2025.lu/", lat: 49.6116, lng: 6.1319, color: "#000000" },
-  { year: 2024, city: "Odense", country: "Denmark", url: null, lat: 55.3938, lng: 10.3895, color: "#000000" },
-  { year: 2023, city: "Leipzig", country: "Germany", url: "https://conferences.eg.org/eurovis2023/", lat: 51.3397, lng: 12.3731, color: "#000000" },
-  { year: 2022, city: "Rome", country: "Italy", url: "https://web.archive.org/web/20240526123404/https://conferences.eg.org/eurovis2022/", lat: 41.9028, lng: 12.4964, color: "#000000" },
-  { year: 2021, city: "Zürich", country: "Switzerland", url: "https://files.ifi.uzh.ch/webarchives/eurovis21.ifi.uzh.ch/", lat: 47.3769, lng: 8.5417, color: "#000000" },
-  { year: 2020, city: "Norrköping", country: "Sweden", url: "https://conferences.eg.org/egev20/", lat: 58.5835, lng: 16.1858, color: "#000000" },
-  { year: 2019, city: "Porto", country: "Portugal", url: "https://web.archive.org/web/20191209130354/https://eurovis2019.org/", lat: 41.1579, lng: -8.6291, color: "#000000" },
-  { year: 2018, city: "Brno", country: "Czech Republic", url: "https://eurovis2018.fi.muni.cz/", lat: 49.1951, lng: 16.6068, color: "#000000" },
-  { year: 2017, city: "Barcelona", country: "Spain", url: "https://web.archive.org/web/20200804020100/https://eurovis2017.virvig.es/", lat: 41.3851, lng: 2.1734, color: "#000000" },
-  { year: 2016, city: "Groningen", country: "Netherlands", url: "https://web.archive.org/web/20170921184648/https://www.cs.rug.nl/jbi/eurovis2016/", lat: 53.2194, lng: 6.5667, color: "#000000" },
-  { year: 2015, city: "Cagliari", country: "Italy", url: "https://web.archive.org/web/2016012tan47/https://www.eurovis2015.it/", lat: 39.2234, lng: 9.1222, color: "#000000" },
-  { year: 2014, city: "Swansea", country: "UK", url: "https://web.archive.org/web/20191223160513/https://eurovis.swansea.ac.uk/", lat: 51.616667, lng: -3.95, color: "#000000" },
-  { year: 2013, city: "Leipzig", country: "Germany", url: "https://web.archive.org/web/20140517070115/https://eurovis2013.de/", lat: 51.3397, lng: 12.3731, color: "#000000" },
-  { year: 2012, city: "Vienna", country: "Austria", url: "https://www.cg.tuwien.ac.at/events/eurovis2012/", lat: 48.2082, lng: 16.3738, color: "#000000" },
-  { year: 2011, city: "Bergen", country: "Norway", url: "https://web.archive.org/web/20160916200045/https://h.uib.no/eurovis2011/", lat: 60.3913, lng: 5.3220, color: "#000000" },
-  { year: 2010, city: "Bordeaux", country: "France", url: "https://eurovis2010.labri.fr/", lat: 44.8378, lng: -0.5792, color: "#000000" },
-  { year: 2009, city: "Berlin", country: "Germany", url: "https://web.archive.org/web/20100330055211/https://www.zib.de/eurovis09/", lat: 52.5200, lng: 13.4050, color: "#000000" },
-  { year: 2008, city: "Eindhoven", country: "Netherlands", url: "https://web.archive.org/web/20181230070117/https://bmia.bmt.tue.nl/eurovis08/index.php", lat: 51.4416, lng: 5.4697, color: "#000000" },
-  { year: 2007, city: "Norrköping", country: "Sweden", url: null, lat: 58.5835, lng: 16.1858, color: "#000000" },
-  { year: 2006, city: "Lisbon", country: "Portugal", url: "https://web.archive.org/web/20090503225326/https://vimmi.inesc-id.pt/eurovis/", lat: 38.7223, lng: -9.1393, color: "#000000" },
-  { year: 2005, city: "Leeds", country: "UK", url: "https://web.archive.org/web/20141223223334/https://www.comp.leeds.ac.uk/eurovis/", lat: 53.7906, lng: -1.5491, color: "#000000" },
-  { year: 2004, city: "Konstanz", country: "Germany", url: null, lat: 47.6979, lng: 9.1827, color: "#8cc0bc" },
-  { year: 2003, city: "Grenoble", country: "France", url: null, lat: 45.1885, lng: 5.7245, color: "#8cc0bc" },
-  { year: 2002, city: "Barcelona", country: "Spain", url: null, lat: 41.3851, lng: 2.1734, color: "#8cc0bc" },
-  { year: 2001, city: "Ascona", country: "Switzerland", url: null, lat: 46.155, lng: 8.768, color: "#8cc0bc" },
-  { year: 2000, city: "Amsterdam", country: "Netherlands", url: null, lat: 52.3676, lng: 4.9041, color: "#8cc0bc" },
-  { year: 1999, city: "Vienna", country: "Austria", url: null, lat: 48.2082, lng: 16.3738, color: "#8cc0bc" },
-  { year: 1998, city: "Blaubeuren", country: "Germany", url: null, lat: 48.5514, lng: 9.3211, color: "#888888" },
-  { year: 1997, city: "Boulogne-sur-Mer", country: "France", url: null, lat: 50.7264, lng: 1.6147, color: "#888888" },
-  { year: 1996, city: "Prague", country: "Czech Republic", url: null, lat: 50.0755, lng: 14.4378, color: "#888888" },
-  { year: 1995, city: "Chia", country: "Italy", url: null, lat: 38.908611, lng: 8.880556, color: "#888888" },
-  { year: 1994, city: "Rostock", country: "Germany", url: null, lat: 54.0857, lng: 12.0921, color: "#888888" },
-  { year: 1993, city: "Abingdon", country: "UK", url: null, lat: 51.7047, lng: -1.2178, color: "#888888" },
-  { year: 1992, city: "Viareggio", country: "Italy", url: null, lat: 43.86665, lng: 10.233333, color: "#888888" },
-  { year: 1991, city: "Delft", country: "Netherlands", url: null, lat: 52.0117, lng: 4.3598, color: "#888888" },
-  { year: 1990, city: "Clamart", country: "France", url: null, lat: 48.8014, lng: 2.2628, color: "#888888" }
+    {
+        year: 2026,
+        city: "Nottingham",
+        country: "UK",
+        url: "https://eurovis.org.uk/",
+        lat: 52.9548,
+        lng: -1.1581,
+        color: "#000000",
+    },
+    {
+        year: 2025,
+        city: "Luxembourg City",
+        country: "Luxembourg",
+        url: "https://www.eurovis2025.lu/",
+        lat: 49.6116,
+        lng: 6.1319,
+        color: "#000000",
+    },
+    {
+        year: 2024,
+        city: "Odense",
+        country: "Denmark",
+        url: null,
+        lat: 55.3938,
+        lng: 10.3895,
+        color: "#000000",
+    },
+    {
+        year: 2023,
+        city: "Leipzig",
+        country: "Germany",
+        url: "https://conferences.eg.org/eurovis2023/",
+        lat: 51.3397,
+        lng: 12.3731,
+        color: "#000000",
+    },
+    {
+        year: 2022,
+        city: "Rome",
+        country: "Italy",
+        url: "https://web.archive.org/web/20240526123404/https://conferences.eg.org/eurovis2022/",
+        lat: 41.9028,
+        lng: 12.4964,
+        color: "#000000",
+    },
+    {
+        year: 2021,
+        city: "Zürich",
+        country: "Switzerland",
+        url: "https://files.ifi.uzh.ch/webarchives/eurovis21.ifi.uzh.ch/",
+        lat: 47.3769,
+        lng: 8.5417,
+        color: "#000000",
+    },
+    {
+        year: 2020,
+        city: "Norrköping",
+        country: "Sweden",
+        url: "https://conferences.eg.org/egev20/",
+        lat: 58.5835,
+        lng: 16.1858,
+        color: "#000000",
+    },
+    {
+        year: 2019,
+        city: "Porto",
+        country: "Portugal",
+        url: "https://web.archive.org/web/20191209130354/https://eurovis2019.org/",
+        lat: 41.1579,
+        lng: -8.6291,
+        color: "#000000",
+    },
+    {
+        year: 2018,
+        city: "Brno",
+        country: "Czech Republic",
+        url: "https://eurovis2018.fi.muni.cz/",
+        lat: 49.1951,
+        lng: 16.6068,
+        color: "#000000",
+    },
+    {
+        year: 2017,
+        city: "Barcelona",
+        country: "Spain",
+        url: "https://web.archive.org/web/20200804020100/https://eurovis2017.virvig.es/",
+        lat: 41.3851,
+        lng: 2.1734,
+        color: "#000000",
+    },
+    {
+        year: 2016,
+        city: "Groningen",
+        country: "Netherlands",
+        url: "https://web.archive.org/web/20170921184648/https://www.cs.rug.nl/jbi/eurovis2016/",
+        lat: 53.2194,
+        lng: 6.5667,
+        color: "#000000",
+    },
+    {
+        year: 2015,
+        city: "Cagliari",
+        country: "Italy",
+        url: "https://web.archive.org/web/2016012tan47/https://www.eurovis2015.it/",
+        lat: 39.2234,
+        lng: 9.1222,
+        color: "#000000",
+    },
+    {
+        year: 2014,
+        city: "Swansea",
+        country: "UK",
+        url: "https://web.archive.org/web/20191223160513/https://eurovis.swansea.ac.uk/",
+        lat: 51.616667,
+        lng: -3.95,
+        color: "#000000",
+    },
+    {
+        year: 2013,
+        city: "Leipzig",
+        country: "Germany",
+        url: "https://web.archive.org/web/20140517070115/https://eurovis2013.de/",
+        lat: 51.3397,
+        lng: 12.3731,
+        color: "#000000",
+    },
+    {
+        year: 2012,
+        city: "Vienna",
+        country: "Austria",
+        url: "https://www.cg.tuwien.ac.at/events/eurovis2012/",
+        lat: 48.2082,
+        lng: 16.3738,
+        color: "#000000",
+    },
+    {
+        year: 2011,
+        city: "Bergen",
+        country: "Norway",
+        url: "https://web.archive.org/web/20160916200045/https://h.uib.no/eurovis2011/",
+        lat: 60.3913,
+        lng: 5.322,
+        color: "#000000",
+    },
+    {
+        year: 2010,
+        city: "Bordeaux",
+        country: "France",
+        url: "https://eurovis2010.labri.fr/",
+        lat: 44.8378,
+        lng: -0.5792,
+        color: "#000000",
+    },
+    {
+        year: 2009,
+        city: "Berlin",
+        country: "Germany",
+        url: "https://web.archive.org/web/20100330055211/https://www.zib.de/eurovis09/",
+        lat: 52.52,
+        lng: 13.405,
+        color: "#000000",
+    },
+    {
+        year: 2008,
+        city: "Eindhoven",
+        country: "Netherlands",
+        url: "https://web.archive.org/web/20181230070117/https://bmia.bmt.tue.nl/eurovis08/index.php",
+        lat: 51.4416,
+        lng: 5.4697,
+        color: "#000000",
+    },
+    {
+        year: 2007,
+        city: "Norrköping",
+        country: "Sweden",
+        url: null,
+        lat: 58.5835,
+        lng: 16.1858,
+        color: "#000000",
+    },
+    {
+        year: 2006,
+        city: "Lisbon",
+        country: "Portugal",
+        url: "https://web.archive.org/web/20090503225326/https://vimmi.inesc-id.pt/eurovis/",
+        lat: 38.7223,
+        lng: -9.1393,
+        color: "#000000",
+    },
+    {
+        year: 2005,
+        city: "Leeds",
+        country: "UK",
+        url: "https://web.archive.org/web/20141223223334/https://www.comp.leeds.ac.uk/eurovis/",
+        lat: 53.7906,
+        lng: -1.5491,
+        color: "#000000",
+    },
+    {
+        year: 2004,
+        city: "Konstanz",
+        country: "Germany",
+        url: null,
+        lat: 47.6979,
+        lng: 9.1827,
+        color: "#8cc0bc",
+    },
+    {
+        year: 2003,
+        city: "Grenoble",
+        country: "France",
+        url: null,
+        lat: 45.1885,
+        lng: 5.7245,
+        color: "#8cc0bc",
+    },
+    {
+        year: 2002,
+        city: "Barcelona",
+        country: "Spain",
+        url: null,
+        lat: 41.3851,
+        lng: 2.1734,
+        color: "#8cc0bc",
+    },
+    {
+        year: 2001,
+        city: "Ascona",
+        country: "Switzerland",
+        url: null,
+        lat: 46.155,
+        lng: 8.768,
+        color: "#8cc0bc",
+    },
+    {
+        year: 2000,
+        city: "Amsterdam",
+        country: "Netherlands",
+        url: null,
+        lat: 52.3676,
+        lng: 4.9041,
+        color: "#8cc0bc",
+    },
+    {
+        year: 1999,
+        city: "Vienna",
+        country: "Austria",
+        url: null,
+        lat: 48.2082,
+        lng: 16.3738,
+        color: "#8cc0bc",
+    },
+    {
+        year: 1998,
+        city: "Blaubeuren",
+        country: "Germany",
+        url: null,
+        lat: 48.5514,
+        lng: 9.3211,
+        color: "#888888",
+    },
+    {
+        year: 1997,
+        city: "Boulogne-sur-Mer",
+        country: "France",
+        url: null,
+        lat: 50.7264,
+        lng: 1.6147,
+        color: "#888888",
+    },
+    {
+        year: 1996,
+        city: "Prague",
+        country: "Czech Republic",
+        url: null,
+        lat: 50.0755,
+        lng: 14.4378,
+        color: "#888888",
+    },
+    {
+        year: 1995,
+        city: "Chia",
+        country: "Italy",
+        url: null,
+        lat: 38.908611,
+        lng: 8.880556,
+        color: "#888888",
+    },
+    {
+        year: 1994,
+        city: "Rostock",
+        country: "Germany",
+        url: null,
+        lat: 54.0857,
+        lng: 12.0921,
+        color: "#888888",
+    },
+    {
+        year: 1993,
+        city: "Abingdon",
+        country: "UK",
+        url: null,
+        lat: 51.7047,
+        lng: -1.2178,
+        color: "#888888",
+    },
+    {
+        year: 1992,
+        city: "Viareggio",
+        country: "Italy",
+        url: null,
+        lat: 43.86665,
+        lng: 10.233333,
+        color: "#888888",
+    },
+    {
+        year: 1991,
+        city: "Delft",
+        country: "Netherlands",
+        url: null,
+        lat: 52.0117,
+        lng: 4.3598,
+        color: "#888888",
+    },
+    {
+        year: 1990,
+        city: "Clamart",
+        country: "France",
+        url: null,
+        lat: 48.8014,
+        lng: 2.2628,
+        color: "#888888",
+    },
 ];
 
 // We pass the data to the client via a JSON string to avoid hydration issues with complex objects
 const jsonData = JSON.stringify(conferences);
 
 /* Include Leaflet CSS */
-import '../styles/leaflet.css'; 
+import "../styles/leaflet.css";
+/*<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  integrity="sha25template256"
+  crossorigin=""
+/>*/
 ---
 
-
 <div class="map-container">
-  <div id="map" data-conferences={jsonData}></div>
+    <div id="map" data-conferences={jsonData}></div>
 </div>
 
 <style is:global>
-  .map-label {
-    background: rgba(255, 255, 255, 0.8) !important;
-    border: 1px solid #ccc !important;
-    border-radius: 4px !important;
-    padding: 1px 6px !important;
-    font-size: 11px !important;
-    font-weight: bold !important;
-    color: #333 !important;
-    white-space: nowrap !important;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.2) !important;
-  }
+    .map-label {
+        background: rgba(255, 255, 255, 0.8) !important;
+        border: 1px solid #ccc !important;
+        border-radius: 4px !important;
+        padding: 1px 6px !important;
+        font-size: 11px !important;
+        font-weight: bold !important;
+        color: #333 !important;
+        white-space: nowrap !important;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) !important;
+    }
 
-/* Container styling */
-.info.legend {
-    padding: 10px 14px;
-    background: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-    font-family: Arial, sans-serif;
-    color: #333;
-    line-height: 1.5;
-}
+    /* Container styling */
+    .info.legend {
+        padding: 10px 14px;
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        border-radius: 5px;
+        font-family: Arial, sans-serif;
+        color: #333;
+        line-height: 1.5;
+    }
 
-/* Individual row alignment */
-.legend-row {
-    display: flex;
-    align-items: center;
-    margin-bottom: 3px;
-}
+    /* Individual row alignment */
+    .legend-row {
+        display: flex;
+        align-items: center;
+        margin-bottom: 3px;
+    }
 
-.legend-row:last-child {
-    margin-bottom: 0;
-}
+    .legend-row:last-child {
+        margin-bottom: 0;
+    }
 
-/* The vertical color bar indicator */
-.legend-row i {
-    width: 12px;
-    height: 18px; /* Taller than it is wide to make a vertical bar */
-    margin-right: 8px;
-    opacity: 0.8;
-    border-radius: 2px; /* Slightly rounded corners */
-    display: inline-block;
-}
+    /* The vertical color bar indicator */
+    .legend-row i {
+        width: 12px;
+        height: 18px; /* Taller than it is wide to make a vertical bar */
+        margin-right: 8px;
+        opacity: 0.8;
+        border-radius: 2px; /* Slightly rounded corners */
+        display: inline-block;
+    }
 
-/* Year text styling */
-.legend-row span {
-    font-size: 12px;
-    font-weight: 500;
-}
-
+    /* Year text styling */
+    .legend-row span {
+        font-size: 12px;
+        font-weight: 500;
+    }
 </style>
 
 <style>
-  .map-container {
-    width: 100%;
-    height: 900px; /* Adjust height as needed */
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
+    .map-container {
+        width: 100%;
+        height: 900px; /* Adjust height as needed */
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
 
-  #map {
-    width: 100%;
-    height: 100%;
-  }
+    #map {
+        width: 100%;
+        height: 100%;
+    }
 
-  /* Ensure popup text looks good */
-  .leaflet-popup-content {
-    font-family: sans-serif;
-    line-height: 1.4;
-  }
-
-  
+    /* Ensure popup text looks good */
+    .leaflet-popup-content {
+        font-family: sans-serif;
+        line-height: 1.4;
+    }
 </style>
 
 <script>
-  import L from 'leaflet';
+    import L from "leaflet";
 
     function sampleParaViewBlackBody(steps) {
-    if (!steps || steps < 1) return [];
 
-    // Official ParaView control points for Black-Body Radiation
-    const controlPoints = [
-        { x: 0.0, r: 0.0,        g: 0.0,        b: 0.0 },
-        { x: 0.4, r: 0.90196078, g: 0.0,        b: 0.0 },
-        { x: 0.8, r: 0.90196078, g: 0.90196078, b: 0.0 },
-        { x: 1.0, r: 1.0,        g: 1.0,        b: 1.0 }
-    ];
+        if (!steps || steps < 1) return [];
 
-    const colors = [];
+        // Official ParaView control points for Black-Body Radiation
+        const controlPoints = [
+            { x: 0.0, r: 0.0, g: 0.0, b: 0.0 },
+            { x: 0.4, r: 0.90196078, g: 0.0, b: 0.0 },
+            { x: 0.8, r: 0.90196078, g: 0.90196078, b: 0.0 },
+            { x: 1.0, r: 1.0, g: 1.0, b: 1.0 },
+        ];
 
-    for (let i = 0; i < steps; i++) {
-        // Determine the position x from 0.0 to 1.0
-        // If steps === 1, default to 0.0 (Black)
-        const x = steps === 1 ? 0.0 : i / (steps - 1);
+        const colors = [];
 
-        // Find the bounding control points for x
-        let lower = controlPoints[0];
-        let upper = controlPoints[controlPoints.length - 1];
+        for (let i = 0; i < steps; i++) {
+            // Determine the position x from 0.0 to 1.0
+            // If steps === 1, default to 0.0 (Black)
+            const x = steps === 1 ? 0.0 : i / (steps - 1);
 
-        for (let j = 0; j < controlPoints.length - 1; j++) {
-        if (x >= controlPoints[j].x && x <= controlPoints[j + 1].x) {
-            lower = controlPoints[j];
-            upper = controlPoints[j + 1];
-            break;
+            // Find the bounding control points for x
+            let lower = controlPoints[0];
+            let upper = controlPoints[controlPoints.length - 1];
+
+            for (let j = 0; j < controlPoints.length - 1; j++) {
+                if (x >= controlPoints[j].x && x <= controlPoints[j + 1].x) {
+                    lower = controlPoints[j];
+                    upper = controlPoints[j + 1];
+                    break;
+                }
+            }
+
+            // Interpolate factor between the lower and upper control points
+            const range = upper.x - lower.x;
+            const factor = range === 0 ? 0 : (x - lower.x) / range;
+
+            // Linear interpolation for normalized R, G, B values [0, 1]
+            const rNorm = lower.r + factor * (upper.r - lower.r);
+            const gNorm = lower.g + factor * (upper.g - lower.g);
+            const bNorm = lower.b + factor * (upper.b - lower.b);
+
+            // Convert normalized components to integer 8-bit space [0, 255]
+            const r = Math.round(rNorm * 255);
+            const g = Math.round(gNorm * 255);
+            const b = Math.round(bNorm * 255);
+
+            // Helper to format as a standard hex string
+            const toHex = (val) => val.toString(16).padStart(2, "0");
+            const hex = `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+
+            colors.push({ r, g, b, hex });
         }
-        }
 
-        // Interpolate factor between the lower and upper control points
-        const range = upper.x - lower.x;
-        const factor = range === 0 ? 0 : (x - lower.x) / range;
-
-        // Linear interpolation for normalized R, G, B values [0, 1]
-        const rNorm = lower.r + factor * (upper.r - lower.r);
-        const gNorm = lower.g + factor * (upper.g - lower.g);
-        const bNorm = lower.b + factor * (upper.b - lower.b);
-
-        // Convert normalized components to integer 8-bit space [0, 255]
-        const r = Math.round(rNorm * 255);
-        const g = Math.round(gNorm * 255);
-        const b = Math.round(bNorm * 255);
-
-        // Helper to format as a standard hex string
-        const toHex = (val) => val.toString(16).padStart(2, '0');
-        const hex = `#${toHex(r)}${toHex(g)}${toHex(b)}`;
-
-        colors.push({ r, g, b, hex });
+        return colors;
     }
 
-    return colors;
-    }
 
-  function initMap() {
-    const mapElement = document.getElementById('map');
-    if (!mapElement) return;
+    function initMap() {
 
-    const rawData = mapElement.getAttribute('data-conferences');
-    if (!rawData) return;
+        const mapElement = document.getElementById("map");
+        if (!mapElement) return;
 
-    const conferences: any[] = JSON.parse(rawData);
+        const rawData = mapElement.getAttribute("data-conferences");
+        if (!rawData) return;
 
-    // Initialize the map centered on Europe
-    const map = L.map('map').setView([50, 10], 5);
+        const conferences: any[] = JSON.parse(rawData);
 
-    // Add OpenStreetMap tile layer
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
+        // Initialize the map centered on Europe
+        const map = L.map("map", {
+            scrollWheelZoom: false}
+        ).setView([50, 10], 5);
 
-    // count the number of conferences which have the color black
-    let totalEvs = 0
-    conferences.forEach((conf) => {
-        if (conf.color == "#000000") totalEvs++;
-    })
-    const sampledMap = sampleParaViewBlackBody(totalEvs + 1); // no city should get pure white
+        // Add OpenStreetMap tile layer
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            attribution:
+                '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        }).addTo(map);
 
-    // iterate our color map to assign missing colors
-    let EvIndex = totalEvs - 1;
-    conferences.forEach((conf, index, arr) => {
-        if (conf.color == "#000000") arr[index].color = sampledMap[EvIndex--].hex;
-    });
+        // count the number of conferences which have the color black
+        let totalEvs = 0;
+        conferences.forEach((conf) => {
+            if (conf.color == "#000000") totalEvs++;
+        });
+        const sampledMap = sampleParaViewBlackBody(totalEvs + 1); // no city should get pure white
 
-    // draw legend
-    const legend = L.control({ position: 'bottomright' });
+        // iterate our color map to assign missing colors
+        let EvIndex = totalEvs - 1;
+        conferences.forEach((conf, index, arr) => {
+            if (conf.color == "#000000")
+                arr[index].color = sampledMap[EvIndex--].hex;
+        });
 
-    legend.onAdd = function (map) {
-        // Create the main container div
-        const div = L.DomUtil.create('div', 'info legend');
-        div.innerHTML = '<h4 style="margin: 0 0 8px 0; font-size: 14px;">Timeline</h4>';
+        // draw legend
+        const legend = L.control({ position: "bottomright" });
 
-        const processedColors = Object.values(
-        conferences.reduce((acc: any, curr) => {
-            if (!acc[curr.color]) {
-            acc[curr.color] = {
-                ...curr,
-                years: [curr.year],
-            };
-            delete acc[curr.color].year;
-            } else {
-            acc[curr.color].years.push(curr.year);
-            }
-            return acc;
-        }, {})
-        );
+        legend.onAdd = function (map) {
+            // Create the main container div
+            const div = L.DomUtil.create("div", "info legend");
+            div.innerHTML =
+                '<h4 style="margin: 0 0 8px 0; font-size: 14px;">Timeline</h4>';
 
-        // Loop through the array of objects
-        processedColors.forEach(entry => {
-            // Append a row featuring a vertical colored bar and the year text
-            let yearstring = ""
-            if (entry.years.length > 1) {
-                const min = Math.min(...entry.years);
-                const max = Math.max(...entry.years);
-                yearstring = min + "-" + max;
-            } else {
-                yearstring = entry.years[0]
-            }
-            div.innerHTML += `
+            const processedColors = Object.values(
+                conferences.reduce((acc: any, curr) => {
+                    if (!acc[curr.color]) {
+                        acc[curr.color] = {
+                            ...curr,
+                            years: [curr.year],
+                        };
+                        delete acc[curr.color].year;
+                    } else {
+                        acc[curr.color].years.push(curr.year);
+                    }
+                    return acc;
+                }, {}),
+            );
+
+            // Loop through the array of objects
+            processedColors.forEach((entry) => {
+                // Append a row featuring a vertical colored bar and the year text
+                let yearstring = "";
+                if (entry.years.length > 1) {
+                    const min = Math.min(...entry.years);
+                    const max = Math.max(...entry.years);
+                    yearstring = min + "-" + max;
+                } else {
+                    yearstring = entry.years[0];
+                }
+                div.innerHTML += `
                 <div class="legend-row">
                     <i style="background: ${entry.color}"></i>
                     <span>${yearstring}</span>
                 </div>
             `;
-        });
+            });
 
-        return div;
-    };
-    legend.addTo(map);
+            return div;
+        };
+        legend.addTo(map);
 
-    // iterate over cities and combine identical cities
-    const processedConferences = Object.values(
-      conferences.reduce((acc: any, curr) => {
-        if (!acc[curr.city]) {
-          acc[curr.city] = {
-            ...curr,
-            years: [curr.year],
-            colors: [curr.color],
-          };
-          delete acc[curr.city].year;
-          delete acc[curr.city].color;
-        } else {
-          acc[curr.city].years.push(curr.year);
-          acc[curr.city].colors.push(curr.color);
-        }
-        return acc;
-      }, {})
-    );
+        // iterate over cities and combine identical cities
+        const processedConferences = Object.values(
+            conferences.reduce((acc: any, curr) => {
+                if (!acc[curr.city]) {
+                    acc[curr.city] = {
+                        ...curr,
+                        years: [curr.year],
+                        colors: [curr.color],
+                    };
+                    delete acc[curr.city].year;
+                    delete acc[curr.city].color;
+                } else {
+                    acc[curr.city].years.push(curr.year);
+                    acc[curr.city].colors.push(curr.color);
+                }
+                return acc;
+            }, {}),
+        );
 
-    // Add markers
-    processedConferences.reverse().forEach((conf: any) => {
-      const popupContent = `
+        // Add markers
+        processedConferences.reverse().forEach((conf: any) => {
+            const popupContent = `
         <div style="padding: 5px;">
-          <strong>EuroVis ${conf.years.sort((a, b) => a - b).join(', ')}</strong><br />
+          <strong>EuroVis ${conf.years.sort((a, b) => a - b).join(", ")}</strong><br />
           ${conf.city}, ${conf.country}<br />
-          ${conf.url ? `<a href="${conf.url}" target="_blank" style="color: #007bff; text-decoration: none;">Visit Website</a>` : '<em>No website available</em>'}
+          ${conf.url ? `<a href="${conf.url}" target="_blank" style="color: #007bff; text-decoration: none;">Visit Website</a>` : "<em>No website available</em>"}
         </div>
       `;
 
-      let marker = 0
-      if (conf.colors.length > 1) {
-        const inlineStyle = `
+            let marker = 0;
+            if (conf.colors.length > 1) {
+                const inlineStyle = `
             width: 100%; 
             height: 100%; 
             border-radius: 50%; 
             background: linear-gradient(90deg, ${conf.colors[0]} 50%, ${conf.colors[1]} 50%);
             border: 3px solid #ffffff;
         `;
-        const dynamicIcon = L.divIcon({
-            className: 'split-circle-wrapper', // Keeps standard layout class separate
-            html: `<div style="${inlineStyle}"></div>`,
-            iconSize: 16,       // Size of the marker in pixels
-            iconAnchor: [12, 12]      // Centers the anchor directly in the middle
+                const dynamicIcon = L.divIcon({
+                    className: "split-circle-wrapper", // Keeps standard layout class separate
+                    html: `<div style="${inlineStyle}"></div>`,
+                    iconSize: 16, // Size of the marker in pixels
+                    iconAnchor: [12, 12], // Centers the anchor directly in the middle
+                });
+                marker = L.marker([conf.lat, conf.lng], {
+                    icon: dynamicIcon,
+                }).addTo(map);
+            } else {
+                let col = conf.colors[0];
+                marker = L.circleMarker([conf.lat, conf.lng], {
+                    radius: 8,
+                    fillColor: col,
+                    color: "#fff", // Border color
+                    weight: 2,
+                    opacity: 1,
+                    fillOpacity: 1,
+                }).addTo(map);
+            }
+
+            // Add a permanent text label next to the marker
+            marker.bindTooltip(
+                `${conf.city}, ${conf.years.sort((a, b) => a - b).join(", ")}`,
+                {
+                    permanent: true,
+                    direction: "right",
+                    offset: [10, 0],
+                    className: "map-label", // Custom class for styling
+                },
+            );
+
+            marker.bindPopup(popupContent);
         });
-        marker = L.marker([conf.lat, conf.lng], { icon: dynamicIcon }).addTo(map);
-      } else {
-        let col = conf.colors[0];
-        marker = L.circleMarker([conf.lat, conf.lng], {
-            radius: 8,
-            fillColor: col,
-            color: '#fff',                      // Border color
-            weight: 2,
-            opacity: 1,
-            fillOpacity: 1
-        }).addTo(map);
-      }
+    }
 
-      // Add a permanent text label next to the marker
-      marker.bindTooltip(`${conf.city}, ${conf.years.sort((a, b) => a - b).join(', ')}`, {
-        permanent: true,
-        direction: 'right',
-        offset: [10, 0],
-        className: 'map-label' // Custom class for styling
-      });
+    // Initialize on page load
+    document.addEventListener("DOMContentLoaded", initMap);
+    // For Astro transitions/client-side navigation
+    document.addEventListener("astro:page-load", initMap);
 
-      marker.bindPopup(popupContent);
-    });
-  }
-
-  // Initialize on page load
-  document.addEventListener('DOMContentLoaded', initMap);
-  // For Astro transitions/client-side navigation
-  document.addEventListener('astro:page-load', initMap);
 </script>
