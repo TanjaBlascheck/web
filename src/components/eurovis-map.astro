@@ -1,6 +1,6 @@
-
 ---
 {/* An interactive OpenStreetMap component showing EuroVis conference locations */}
+
 
 interface Conference {
   year: number;
@@ -53,11 +53,10 @@ const conferences: Conference[] = [
 
 // We pass the data to the client via a JSON string to avoid hydration issues with complex objects
 const jsonData = JSON.stringify(conferences);
+
+/* Include Leaflet CSS */
+import '../styles/leaflet.css'; 
 ---
-
-
-<!-- Include Leaflet CSS -->
-<link rel="stylesheet" href= {import.meta.env.BASE_URL +"/src/styles/leaflet.css"} />
 
 
 <div class="map-container">
