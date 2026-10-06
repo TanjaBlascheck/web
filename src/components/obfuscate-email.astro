@@ -1,22 +1,23 @@
 ---
 interface Props {
-    email: string
+    email: string;
+    content?: string
 }
 
-const { email } = Astro.props;
+const { email, content } = Astro.props;
 ---
-
-<!-- JAVA SCRIPT ------------------------------------------------ -->
-<script is:inline>
-
-    function replaceEmailAt(email) {
-        return email.replace('@', '[at]');
-    }
-
-
-</script>
-
 
 <!-- HTML ------------------------------------------------------- -->
 
-<span><a href={'mailto:'+ email} data-obfuscation><span>{email}</span></a><noscript>JavaScript is required to display the obfuscated email address</noscript></span>
+<span>
+    <a href={'mailto:'+ email} data-obfuscation>
+        <span>
+            {content?.trim() ? (
+                content
+            ) : (
+                email
+            )}
+        </span>
+    </a>
+    <noscript>JavaScript is required to display the obfuscated email address</noscript>
+</span>

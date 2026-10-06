@@ -1,0 +1,29 @@
+
+.logo-grid {
+    display:                grid;
+    grid-template-columns:  auto auto auto auto auto;
+    gap:                    32px;
+    align-items:            center;
+    width:                  100%;
+    max-width:              100%;
+    box-sizing:             border-box;
+}
+
+.partner-logo {
+    width:                  100%;
+    max-width:              100%;
+    height:                 auto;
+    max-height:             65px;
+    object-fit:             contain;
+    display:                block;
+}
+
+/***** Additional options for Responsive Web Design *****/
+
+@media screen and (max-width: 1280px) {
+
+  .logo-grid {
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+  
+}

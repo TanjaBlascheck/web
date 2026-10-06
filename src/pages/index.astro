@@ -16,7 +16,7 @@ import * as Updates from "../components/updates.mdx";
         background-color:       var(--colorMediumBlue);
         margin:                 0;
         padding-top:            0.5rem;
-        padding-bottom:         0.5rem;
+        padding-bottom:         1.5rem;
         padding-left:           2rem;
         padding-right:          2rem;
         margin-top:             2rem;
@@ -61,15 +61,13 @@ import * as Updates from "../components/updates.mdx";
 
 
 <!-- HTML ------------------------------------------------------- -->
-<Layout title="Home" description="Front page of the website">
+<Layout frontmatter={{ title: "Home", description: "Front page of the website" }}>
 
     <Welcome.Content />
 
-<!--
     <div class="news">
         <Updates.Content />
     </div>
--->
 
     <Information.Content />
 

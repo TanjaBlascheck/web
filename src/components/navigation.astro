@@ -32,7 +32,7 @@ const { pageTitle, colorLightBlue, colorMediumBlue, colorAnthracite, colorOrange
     });    
 
     function openOverlayMenu() {
-        document.getElementById("menuBackground").style.width = "60%";
+        document.getElementById("menuBackground").style.width = "75%";
     }
 
     function closeOverlayMenu() {
@@ -40,7 +40,7 @@ const { pageTitle, colorLightBlue, colorMediumBlue, colorAnthracite, colorOrange
     }     
 
     function menuButtonClick(clickedButton) {
-        if (document.documentElement.clientWidth <= 720) {
+        if (document.documentElement.clientWidth <= 1080) {
             // First, hide all submenus
             submenus = document.getElementsByClassName("submenu");
             for (const submenu of submenus) {
@@ -172,7 +172,6 @@ const { pageTitle, colorLightBlue, colorMediumBlue, colorAnthracite, colorOrange
 
     nav {
         justify-content:        left;
-        padding-left:           15vw;
     }
 
     .threeDashMenu {
@@ -183,7 +182,7 @@ const { pageTitle, colorLightBlue, colorMediumBlue, colorAnthracite, colorOrange
         padding-top:            0.75rem;
         padding-bottom:         0.75rem;
         padding-right:          0.75rem;
-        padding-left:           0;
+        padding-left:           15vw;
         background-color:       var(--colorMediumBlue);        
         transition-property:    background-color; 
         transition-duration:    0.25s;        
@@ -269,7 +268,7 @@ const { pageTitle, colorLightBlue, colorMediumBlue, colorAnthracite, colorOrange
 
 @media screen and (max-width: 720px) {
 
-    nav {
+    .threeDashMenu {
         padding-left:           10vw;
     }
 }
