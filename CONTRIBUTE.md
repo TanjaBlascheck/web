@@ -42,10 +42,19 @@ This is important because all deadlines will be compiled into a [table](src/subm
 It will automatically cross out the original and add "Extended:" etc.
 
 #### External links
-External link should open in a new window. This is automatically done for links in Markdown files by `rehype-external-links`.
+External link should open in a new window. This is automatically done for markdown links `[text](link)` in `.mdx` files by the plugin `rehype-external-links`.
 
 #### Obfuscate email addresses
-Email addresses should always be obfuscated to minimize misuse:
+Email addresses should always be obfuscated to minimize misuse.
+In a `.mdx` file include
 ```HTML
-<span><a href="mailto:XXX@XXX.de" data-obfuscation><span>XXX[at]XXX.de</span></a><noscript>JavaScript required to show obfuscated email address.</noscript></span>
+    import ObfuscateEmail from "../components/ObfuscateEmail.astro";
+```
+and use
+```HTML
+    <ObfuscateEmail email='something@something.de' />
+```
+to keep the email as text or provide an alternative text via:
+```HTML
+    <ObfuscateEmail content='alternative text' email='something@something.de' />
 ```
