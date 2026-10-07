@@ -25,7 +25,7 @@ We can then see the changes and approve and integrate them into the live page. T
 ## Conventions
 
 #### Deadlines
-Please add deadlines to the [database](src/data/deadlines.json) and use the Deadlineitem component. It will automatically translate timezones for the reader (and give a countdown as tooltip). Example:
+Please add deadlines to the [database](src/data/deadlines.json) and use the DeadlineItem component. It will automatically translate timezones for the reader (and give a countdown as tooltip). Example:
 ```
 import DeadlineItem from '../../components/DeadlineItem.astro';
 <DeadlineItem category="STARs" type="Abstract Submission" /><br/>
