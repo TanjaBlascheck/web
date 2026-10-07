@@ -16,7 +16,21 @@
 * [**Commit**](https://docs.github.com/en/desktop/making-changes-in-a-branch/committing-and-reviewing-changes-to-your-project-in-github-desktop) your changes and add a descriptive commit message.
 * Create a [**Pull Request**](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request).
 
+**Note:** If you use the small link at the bottom of each page ("suggest a fix"), the GitHub UX will basically force you to do it this way:
+- you get a green button for making a fork if necessary
+- another green button for committing the changes
+- and a last green button for creating the pull request
+We can then see the changes and approve and integrate them into the live page. The build process takes about a minute. 
+
 ## Conventions
+
+#### Deadlines
+Please add deadlines to the [database](src/data/deadlines.json) and use the Deadlineitem component. It will automatically translate timezones for the reader (and give a countdown as tooltip). Example:
+```
+import DeadlineItem from '../../components/DeadlineItem.astro';
+<DeadlineItem category="STARs" type="Abstract Submission" /><br/>
+```
+This is important because all deadlines will be compiled into a [table](src/submissions/all-deadlines.mdx) automatically.
 
 #### External links
 External link should open in a new window. This is automatically done for links in Markdown files by `rehype-external-links`.
