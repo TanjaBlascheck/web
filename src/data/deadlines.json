@@ -1,48 +1,40 @@
 [
   {
-    "id": "workshop-submission",
     "category": "Workshops",
     "type": "Proposal Submission",
     "originalDate": "2026-10-12T23:59:59-12:00"
   },
   {
-    "id": "workshop-notification",
     "category": "Workshops",
     "type": "Notification",
     "originalDate": "2026-10-26T23:59:59-12:00"
   },
   {
-    "id": "star-abstract",
     "category": "STARs",
     "type": "Abstract Submission",
     "originalDate": "2026-11-30T23:59:59-12:00"
   },
   {
-    "id": "star-submission",
     "category": "STARs",
     "type": "Submission",
     "originalDate": "2026-12-07T23:59:59-12:00"
   },
   {
-    "id": "star-first-notification",
     "category": "STARs",
     "type": "First Round Notification",
     "originalDate": "2027-02-02T23:59:59-12:00"
   },
   {
-    "id": "star-revision",
     "category": "STARs",
     "type": "Revision Submission",
     "originalDate": "2027-02-22T23:59:59-12:00"
   },
   {
-    "id": "star-final-notification",
     "category": "STARs",
     "type": "Final Notification",
     "originalDate": "2027-03-08T23:59:59-12:00"
   },
   {
-    "id": "star-cameara-ready",
     "category": "STARs",
     "type": "Camera-Ready Submission",
     "originalDate": "2027-03-22T23:59:59-12:00"
