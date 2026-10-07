@@ -30,7 +30,16 @@ Please add deadlines to the [database](src/data/deadlines.json) and use the Dead
 import DeadlineItem from '../../components/DeadlineItem.astro';
 <DeadlineItem category="STARs" type="Abstract Submission" /><br/>
 ```
-This is important because all deadlines will be compiled into a [table](src/submissions/all-deadlines.mdx) automatically.
+This is important because all deadlines will be compiled into a [table](src/submissions/all-deadlines.mdx) automatically. If you want to *extend* a deadline, just add an extendedDate to the entry, example:
+```
+  {
+    "category": "Workshops",
+    "type": "Proposal Submission",
+    "originalDate": "2026-10-12T23:59:59-12:00",
+    "extendedDate": "2026-10-17T23:59:59-12:00"
+  },
+```
+It will automatically cross out the original and add "Extended:" etc.
 
 #### External links
 External link should open in a new window. This is automatically done for links in Markdown files by `rehype-external-links`.
